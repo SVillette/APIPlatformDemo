@@ -52,3 +52,44 @@ jobs:
 
             -   name: Check code style
                 run: ./vendor/bin/php-cs-fixer fix --dry-run
+
+    phpstan:
+        name: PHPStan
+        runs-on: ubuntu-latest
+        if: >-
+            github.event_name == 'push' || 
+            (github.event_name == 'pull_request' && !github.event.pull_request.draft)
+        strategy:
+            fail-fast: true
+
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v3
+
+            -   name: Setup PHP with tools
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 8.2
+                    coverage: none
+                    tools: composer:v2
+
+            -   name: Copy .env.ci to .env.local
+                run: cp .env.ci .env.local
+
+            -   name: Get composer cache directory
+                id: composer-cache
+                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+            -   name: Cache composer dependencies
+                uses: actions/cache@v3
+                with:
+                    path: ${{ steps.composer-cache.outputs.dir }}
+                    key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+                    restore-keys: |
+                        ${{ runner.os }}-composer-
+
+            -   name: Install Composer dependencies
+                run: composer install --no-interaction --no-progress
+
+            -   name: Run static analysis with PHPStan
+                run: ./vendor/bin/phpstan analyse
