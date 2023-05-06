@@ -62,23 +62,17 @@ jobs:
             -   name: Create .env.local.php for test environment
                 run: composer dump-env test
 
-            -   name: Debug .env.local.php
-                run: cat .env.local.php
-
             -   name: Clear cache
-                run: php bin/console cache:clear -vvv
-
-            -   name: Debug .env files
-                run: php bin/console debug:dotenv
-
-            -   name: Show about information
-                run: php bin/console about
+                run: php bin/console cache:clear
 
             -   name: Create MySQL database
                 run: php bin/console doctrine:database:create --if-not-exists
 
             -   name: Execute migrations
                 run: php bin/console doctrine:migrations:migrate
+
+            -   name: Execute Doctrine data fixtures
+                run: php bin/console doctrine:fixtures:load --append
 
             -   name: Run functional tests
                 run: vendor/bin/phpunit --group functional

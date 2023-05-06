@@ -25,7 +25,7 @@ final class AdminUserPersistanceTest extends KernelTestCase
         $now = $clock->now();
 
         $adminUser = new AdminUser();
-        $adminUser->setEmail('john.doe@example.com');
+        $adminUser->setEmail('admin-user@example.com');
         $adminUser->setPlainPassword('plain-password');
         self::assertNotNull($adminUser->getPlainPassword());
         $adminUser->setPassword('hashed-password');
@@ -37,13 +37,13 @@ final class AdminUserPersistanceTest extends KernelTestCase
         $entityManager->clear();
 
         $repository = $entityManager->getRepository(AdminUser::class);
-        $adminUser = $repository->findOneBy(['email' => 'john.doe@example.com']);
+        $adminUser = $repository->findOneBy(['email' => 'admin-user@example.com']);
 
         self::assertNotNull($adminUser);
         self::assertInstanceOf(AdminUserInterface::class, $adminUser);
 
-        self::assertEquals('john.doe@example.com', $adminUser->getEmail());
-        self::assertEquals('john.doe@example.com', $adminUser->getUserIdentifier());
+        self::assertEquals('admin-user@example.com', $adminUser->getEmail());
+        self::assertEquals('admin-user@example.com', $adminUser->getUserIdentifier());
         self::assertNull($adminUser->getPlainPassword());
         self::assertEquals('hashed-password', $adminUser->getPassword());
         self::assertNotNull($adminUser->getCreatedAt());

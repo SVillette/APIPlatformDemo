@@ -7,8 +7,9 @@ namespace App\Entity;
 use Symandy\Component\Resource\Model\ResourceInterface;
 use Symandy\Component\Resource\Model\TimestampableInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
-interface AdminUserInterface extends ResourceInterface, TimestampableInterface, PasswordAuthenticatedUserInterface
+interface AdminUserInterface extends ResourceInterface, TimestampableInterface, UserInterface, PasswordAuthenticatedUserInterface
 {
     final public const ROLE_ADMIN = 'ROLE_ADMIN';
 

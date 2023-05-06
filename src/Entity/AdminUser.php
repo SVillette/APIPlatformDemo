@@ -18,7 +18,7 @@ class AdminUser implements AdminUserInterface
     use ResourceTrait;
     use TimestampableTrait;
 
-    #[Column(type: 'string', nullable: false)]
+    #[Column(type: 'string', unique: true, nullable: false)]
     private ?string $email = null;
 
     private ?string $plainPassword = null;
@@ -67,5 +67,10 @@ class AdminUser implements AdminUserInterface
     public function getUserIdentifier(): string
     {
         return $this->getEmail() ?? throw new RuntimeException('User has null email');
+    }
+
+    public function eraseCredentials(): void
+    {
+        $this->plainPassword = null;
     }
 }
