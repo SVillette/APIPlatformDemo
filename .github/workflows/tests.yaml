@@ -74,6 +74,12 @@ jobs:
             -   name: Execute Doctrine data fixtures
                 run: php bin/console doctrine:fixtures:load --append
 
+            -   name: Install Yarn dependencies
+                run: yarn install
+
+            -   name: Build Webpack assets
+                run: yarn build
+
             -   name: Run functional tests
                 run: vendor/bin/phpunit --group functional
 
