@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Model;
 
+use App\Entity\AdminUser;
+use App\Entity\AdminUserInterface;
 use App\Entity\Post;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
@@ -25,6 +27,15 @@ final class PostPersistanceTest extends KernelTestCase
         $entityManager = self::getContainer()->get(EntityManagerInterface::class);
         self::assertInstanceOf(EntityManagerInterface::class, $entityManager);
 
+        $adminUserRepository = $entityManager->getRepository(AdminUser::class);
+        $adminUser = $adminUserRepository->findOneBy(['email' => 'john.doe@example.com']);
+
+        if (null == $adminUser) {
+            self::markTestSkipped('Admin user "john.doe@example.com" could not be found. You should maybe load data fixtures');
+        }
+
+        self::assertInstanceOf(AdminUserInterface::class, $adminUser);
+
         $clock = new MockClock();
 
         $now = $clock->now();
@@ -37,13 +48,14 @@ final class PostPersistanceTest extends KernelTestCase
         $post->setCreatedAt($now);
         $post->setUpdatedAt($now);
 
-        $entityManager->persist($post);
+        $adminUser->addPost($post);
+
         $entityManager->flush();
 
         $entityManager->clear();
 
-        $repository = $entityManager->getRepository(Post::class);
-        $post = $repository->findOneBy(['title' => 'post-title']);
+        $postRepository = $entityManager->getRepository(Post::class);
+        $post = $postRepository->findOneBy(['title' => 'post-title']);
 
         self::assertNotNull($post);
         self::assertInstanceOf(Post::class, $post);
@@ -56,5 +68,8 @@ final class PostPersistanceTest extends KernelTestCase
         self::assertNotNull($post->getUpdatedAt());
         self::assertEquals($now->format('Y-m-d H:i:s'), $post->getCreatedAt()->format('Y-m-d H:i:s'));
         self::assertEquals($now->format('Y-m-d H:i:s'), $post->getUpdatedAt()->format('Y-m-d H:i:s'));
+
+        self::assertNotNull($post->getAuthor());
+        self::assertEquals('john.doe@example.com', $post->getAuthor()->getEmail());
     }
 }

@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\Table;
 use RuntimeException;
 use Symandy\Component\Resource\Model\ResourceTrait;
@@ -25,6 +28,15 @@ class AdminUser implements AdminUserInterface
 
     #[Column(type: 'string', nullable: false)]
     private ?string $password = null;
+
+    /** @var Collection<int, PostInterface> */
+    #[OneToMany(mappedBy: 'author', targetEntity: Post::class, cascade: ['persist'], fetch: 'EXTRA_LAZY', orphanRemoval: true)]
+    private Collection $posts;
+
+    public function __construct()
+    {
+        $this->posts = new ArrayCollection();
+    }
 
     public function getEmail(): ?string
     {
@@ -72,5 +84,40 @@ class AdminUser implements AdminUserInterface
     public function eraseCredentials(): void
     {
         $this->plainPassword = null;
+    }
+
+    public function hasPosts(): bool
+    {
+        return 0 < $this->posts->count();
+    }
+
+    public function getPosts(): Collection
+    {
+        return $this->posts;
+    }
+
+    public function hasPost(PostInterface $post): bool
+    {
+        return $this->posts->contains($post);
+    }
+
+    public function addPost(PostInterface $post): void
+    {
+        if ($this->hasPost($post)) {
+            return;
+        }
+
+        $this->posts->add($post);
+        $post->setAuthor($this);
+    }
+
+    public function removePost(PostInterface $post): void
+    {
+        if (!$this->hasPost($post)) {
+            return;
+        }
+
+        $this->posts->removeElement($post);
+        $post->setAuthor(null);
     }
 }

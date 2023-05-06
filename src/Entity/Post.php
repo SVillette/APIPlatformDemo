@@ -8,6 +8,8 @@ use App\Repository\PostRepository;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\Table;
 use Symandy\Component\Resource\Model\ResourceTrait;
 use Symandy\Component\Resource\Model\TimestampableTrait;
@@ -20,6 +22,10 @@ class Post implements PostInterface
     use ResourceTrait;
     use TimestampableTrait;
 
+    #[ManyToOne(targetEntity: AdminUser::class, inversedBy: 'posts')]
+    #[JoinColumn(name: 'author_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+    private ?AdminUserInterface $author = null;
+
     #[Column(type: 'ulid', unique: true, nullable: false)]
     private ?Ulid $ulid = null;
 
@@ -31,6 +37,16 @@ class Post implements PostInterface
 
     #[Column(type: 'datetime', nullable: false)]
     private ?DateTimeInterface $publishedAt = null;
+
+    public function getAuthor(): ?AdminUserInterface
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?AdminUserInterface $author): void
+    {
+        $this->author = $author;
+    }
 
     public function getUlid(): ?Ulid
     {
