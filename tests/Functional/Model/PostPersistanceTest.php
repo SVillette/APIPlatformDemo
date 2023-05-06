@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Tests\Functional\Model;
 
 use App\Entity\Post;
-use DAMA\DoctrineTestBundle\Doctrine\DBAL\StaticDriver;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use PHPUnit\Framework\Attributes\Group;

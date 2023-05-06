@@ -17,5 +17,4 @@ use Doctrine\Persistence\ObjectRepository;
  */
 interface PostRepositoryInterface extends ObjectRepository
 {
-
 }
