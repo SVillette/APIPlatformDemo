@@ -50,5 +50,6 @@ final class AdminUserPersistanceTest extends KernelTestCase
         self::assertNotNull($adminUser->getUpdatedAt());
         self::assertEquals($now->format('Y-m-d H:i:s'), $adminUser->getCreatedAt()->format('Y-m-d H:i:s'));
         self::assertEquals($now->format('Y-m-d H:i:s'), $adminUser->getUpdatedAt()->format('Y-m-d H:i:s'));
+        self::assertFalse($adminUser->hasPosts());
     }
 }

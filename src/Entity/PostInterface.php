@@ -11,7 +11,9 @@ use Symfony\Component\Uid\Ulid;
 
 interface PostInterface extends ResourceInterface, TimestampableInterface
 {
-    public function getId(): ?int;
+    public function getAuthor(): ?AdminUserInterface;
+
+    public function setAuthor(?AdminUserInterface $author): void;
 
     public function getUlid(): ?Ulid;
 
