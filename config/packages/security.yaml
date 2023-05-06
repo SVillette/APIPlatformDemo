@@ -22,6 +22,7 @@ security:
             form_login:
                 login_path: app_admin_login
                 check_path: app_admin_login
+                default_target_path: app_admin_dashboard
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall

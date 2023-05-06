@@ -1,0 +1,17 @@
+.container-fluid {
+  padding: 0 !important;
+}
+
+@import '~bootstrap/scss/bootstrap';
+
+.login-card {
+  min-width: 95%;
+
+  @include media-breakpoint-up(sm) {
+    min-width: 75%;
+  }
+
+  @include media-breakpoint-up(lg) {
+    min-width: 33%;
+  }
+}
