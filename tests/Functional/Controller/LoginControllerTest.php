@@ -49,4 +49,24 @@ final class LoginControllerTest extends WebTestCase
         $client->request(Request::METHOD_GET, '/admin');
         self::assertResponseIsSuccessful();
     }
+
+    public function testLoggedInAdminUserCannotAccessLoginPage(): void
+    {
+        $client = self::createClient();
+        $adminUserRepository = self::getContainer()->get(AdminUserRepositoryInterface::class);
+        self::assertInstanceOf(AdminUserRepositoryInterface::class, $adminUserRepository);
+
+        $adminUser = $adminUserRepository->findOneBy(['email' => 'john.doe@example.com']);
+        self::assertNotNull($adminUser);
+
+        $client->loginUser($adminUser, 'admin');
+
+        $client->request(Request::METHOD_GET, '/admin/login');
+
+        self::assertResponseRedirects('/admin');
+        $client->followRedirect();
+
+        self::assertResponseIsSuccessful();
+        self::assertRouteSame('app_admin_dashboard');
+    }
 }

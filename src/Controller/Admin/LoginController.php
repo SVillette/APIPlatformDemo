@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
+use App\Entity\AdminUserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,6 +21,12 @@ final class LoginController extends AbstractController
     #[Route(path: '/login', name: 'app_admin_login')]
     public function indexAction(): Response
     {
+        $user = $this->getUser();
+
+        if ($user instanceof AdminUserInterface) {
+            return $this->redirectToRoute('app_admin_dashboard');
+        }
+
         $error = $this->authenticationUtils->getLastAuthenticationError();
         $lastUsername = $this->authenticationUtils->getLastUsername();
 
