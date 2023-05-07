@@ -24,5 +24,10 @@ parameters:
             message: '#^Method App\\Application\\Paginator\\DoctrineORMPaginator\:\:getItems\(\) should return array\<int, T\> but returns mixed\.$#'
             path: src/Application/Paginator/DoctrineORMPaginator.php
 
+        # PHPStan Doctrine extension cannot know the type of `Query::getSingleScalarResult()`
+        -
+            message: '#^Method App\\Repository\\[a-zA-Z0-9_\\]+\:\:[a-zA-Z0-9_]*count[a-zA-Z0-9_]*\(\) should return int but returns mixed\.$#'
+            path: src/Repository/*
+
     scanFiles:
         - data/fixtures/posts-data.php

@@ -1,0 +1,14 @@
+app:
+    admin_users_count: >-
+        {admin_users, plural,
+            =0    {0 admin users}
+            =1    {1 admin user}
+            other {# admin users}
+        }
+
+    posts_count: >-
+        {posts, plural,
+            =0    {0 posts}
+            =1    {1 post}
+            other {# posts}
+        }

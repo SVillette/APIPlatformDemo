@@ -1,5 +1,33 @@
 {% extends 'admin/base.html.twig' %}
 
 {% block body %}
+<div class="mx-3 mt-3">
     <h1>Welcome to admin dashboard</h1>
+
+    <p>You can find a summary of what to find on the admin panel</p>
+
+    <div class="row">
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card position-relative border border-primary border-1">
+                <div class="card-body">
+                    <div class="d-flex justify-content-center">
+                        <span class="fs-1">{{ 'app.posts_count'|trans({posts: postsCount})|upper }}</span>
+                        <a href="{{ path('app_admin_post_index') }}" class="stretched-link"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="card position-relative">
+                <div class="card-body">
+                    <div class="d-flex justify-content-center">
+                        <span class="fs-1">{{ 'app.admin_users_count'|trans({admin_users: adminUsersCount})|upper }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3"></div>
+        <div class="col-12 col-sm-6 col-md-3"></div>
+    </div>
+</div>
 {% endblock %}

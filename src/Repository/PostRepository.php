@@ -9,6 +9,8 @@ use App\Application\Paginator\PaginatorInterface;
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Criteria;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 use function max;
@@ -39,5 +41,18 @@ class PostRepository extends ServiceEntityRepository implements PostRepositoryIn
         ;
 
         return new DoctrineORMPaginator($queryBuilder->getQuery(), $page);
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
+    public function countAll(): int
+    {
+        $queryBuilder = $this->createQueryBuilder('p');
+
+        $queryBuilder->select([$queryBuilder->expr()->count('p')]);
+
+        return $queryBuilder->getQuery()->getSingleScalarResult();
     }
 }

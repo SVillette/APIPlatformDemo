@@ -23,4 +23,6 @@ interface PostRepositoryInterface extends ObjectRepository
      * @return PaginatorInterface<PostInterface>
      */
     public function findLatestPaginated(int $page = 1): PaginatorInterface;
+
+    public function countAll(): int;
 }

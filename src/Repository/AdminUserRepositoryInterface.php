@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
+use App\Entity\AdminUser;
 use App\Entity\AdminUserInterface;
 use Doctrine\Persistence\ObjectRepository;
 
 /**
- * @extends ObjectRepository<AdminUserInterface>
+ * @extends ObjectRepository<AdminUser>
  *
  * @method AdminUserInterface|null find($id, $lockMode = null, $lockVersion = null)
  * @method AdminUserInterface|null findOneBy(array $criteria, array $orderBy = null)
@@ -17,4 +18,5 @@ use Doctrine\Persistence\ObjectRepository;
  */
 interface AdminUserRepositoryInterface extends ObjectRepository
 {
+    public function countAll(): int;
 }
