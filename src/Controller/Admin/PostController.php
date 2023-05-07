@@ -4,16 +4,23 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
+use App\Application\Handler\PostHandlerInterface;
+use App\DTO\UpdatePost;
+use App\Form\PostType;
 use App\Repository\PostRepositoryInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Webmozart\Assert\Assert;
 
 #[Route(path: '/admin/posts', name: 'app_admin_post_')]
 final class PostController extends AbstractController
 {
     public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+        private readonly PostHandlerInterface $postHandler,
         private readonly PostRepositoryInterface $postRepository,
     ) {
     }
@@ -29,5 +36,25 @@ final class PostController extends AbstractController
         }
 
         return $this->render('admin/post/index.html.twig', ['pagination' => $pagination]);
+    }
+
+    #[Route(path: '/create', name: 'create')]
+    public function createAction(Request $request): Response
+    {
+        $form = $this->createForm(PostType::class)->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $dto = $form->getData();
+            Assert::isInstanceOf($dto, UpdatePost::class);
+
+            $post = $this->postHandler->create($dto);
+
+            $this->entityManager->persist($post);
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('app_admin_post_index');
+        }
+
+        return $this->render('admin/post/create.html.twig', ['form' => $form]);
     }
 }

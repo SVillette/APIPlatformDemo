@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use DateTimeInterface;
+use DateTimeZone;
 use Symandy\Component\Resource\Model\ResourceInterface;
 use Symandy\Component\Resource\Model\TimestampableInterface;
 use Symfony\Component\Uid\Ulid;
@@ -30,4 +31,6 @@ interface PostInterface extends ResourceInterface, TimestampableInterface
     public function getPublishedAt(): ?DateTimeInterface;
 
     public function setPublishedAt(?DateTimeInterface $publishedAt): void;
+
+    public function publish(DateTimeZone $timezone = null): void;
 }

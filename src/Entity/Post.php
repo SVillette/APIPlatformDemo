@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\PostRepository;
+use DateTimeImmutable;
 use DateTimeInterface;
+use DateTimeZone;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
@@ -14,6 +16,10 @@ use Doctrine\ORM\Mapping\Table;
 use Symandy\Component\Resource\Model\ResourceTrait;
 use Symandy\Component\Resource\Model\TimestampableTrait;
 use Symfony\Component\Uid\Ulid;
+use Webmozart\Assert\Assert;
+
+use function date_default_timezone_get;
+use function time;
 
 #[Entity(repositoryClass: PostRepository::class)]
 #[Table(name: 'posts')]
@@ -86,5 +92,15 @@ class Post implements PostInterface
     public function setPublishedAt(?DateTimeInterface $publishedAt): void
     {
         $this->publishedAt = $publishedAt;
+    }
+
+    /** @noinspection PhpUnhandledExceptionInspection */
+    public function publish(DateTimeZone $timezone = null): void
+    {
+        $timezone ??= new DateTimeZone(date_default_timezone_get());
+        $publishedAt = DateTimeImmutable::createFromFormat('U', (string) time());
+        Assert::isInstanceOf($publishedAt, DateTimeInterface::class);
+
+        $this->setPublishedAt($publishedAt->setTimezone($timezone));
     }
 }

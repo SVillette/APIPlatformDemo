@@ -1,0 +1,41 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Create a new post{% endblock %}
+
+{% block body %}
+<div class="mx-3 mt-3">
+    <div class="row">
+        <div class="col-lg-4">
+            <h1>Create a new post</h1>
+        </div>
+    </div>
+
+    <div class="card border border1 border-dark bg-light">
+        {{ form_start(form, {action: path('app_admin_post_create'), attr: {novalidate: 'novalidate'}}) }}
+
+        {{ form_widget(form._token) }}
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col mx-2">
+                    {{ form_row(form.title) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col mx-2">
+                    {{ form_row(form.content) }}
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="d-flex justify-content-between">
+                <a class="btn btn-danger" href="{{ path('app_admin_post_index') }}">Cancel</a>
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+        </div>
+
+        {{ form_end(form, {render_rest: false}) }}
+    </div>
+</div>
+{% endblock %}
+
