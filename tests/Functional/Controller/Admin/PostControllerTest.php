@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Functional\Controller\Admin;
 
 use App\Repository\PostRepositoryInterface;
+use DateTimeInterface;
 use Doctrine\Common\Collections\Criteria;
 use PHPUnit\Framework\Attributes\Group;
 use Symfony\Component\HttpFoundation\Request;
@@ -129,8 +130,38 @@ final class PostControllerTest extends AbstractLoggedInWebTestCase
         self::assertResponseIsSuccessful();
         self::assertRouteSame('app_admin_post_index');
 
-        // A new post is created so 49 from data fixtures +1
         self::assertSelectorTextContains('h1', 'Posts list (49)');
         self::assertSelectorTextContains('table.table tbody tr td:first-child', 'A title has been updated');
+    }
+
+    public function testDeleteAction(): void
+    {
+        $client = $this->loginToAdminUser();
+
+        $postRepository = $client->getContainer()->get(PostRepositoryInterface::class);
+        Assert::isInstanceOf($postRepository, PostRepositoryInterface::class);
+
+        $latestPost = $postRepository->findBy([], ['publishedAt' => Criteria::DESC], 1)[0] ?? null;
+        if (null === $latestPost) {
+            self::markTestSkipped('Latest post could not be found. You should load data fixtures');
+        }
+
+        $latestPostPublishedAt = $latestPost->getPublishedAt();
+        Assert::isInstanceOf($latestPostPublishedAt, DateTimeInterface::class);
+
+        $client->request(Request::METHOD_DELETE, "/admin/posts/{$latestPost->getId()}");
+
+        self::assertResponseRedirects();
+        $client->followRedirect();
+
+        self::assertResponseIsSuccessful();
+        self::assertRouteSame('app_admin_post_index');
+
+        // A post is deleted so 49 from data fixtures -1
+        self::assertSelectorTextContains('h1', 'Posts list (48)');
+        self::assertSelectorTextNotContains(
+            'table.table tbody tr td:nth-child(2)',
+            $latestPostPublishedAt->format('Y-m-d')
+        );
     }
 }

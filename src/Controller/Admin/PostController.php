@@ -79,4 +79,15 @@ final class PostController extends AbstractController
 
         return $this->render('admin/post/update.html.twig', ['form' => $form, 'post' => $post]);
     }
+
+    #[Route(path: '/{id}', name: 'delete', requirements: ['id' => '\d+'], methods: [Request::METHOD_DELETE])]
+    public function deleteAction(int $id): Response
+    {
+        $post = $this->postRepository->findOneBy(['id' => $id]) ?? throw $this->createNotFoundException();
+
+        $this->entityManager->remove($post);
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('app_admin_post_index');
+    }
 }
