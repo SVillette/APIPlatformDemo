@@ -16,5 +16,13 @@ parameters:
             message: '#^Property App\\Entity\\[a-zA-Z0-9_\\]+\:\:\$[a-zA-Z0-9_]+ type mapping mismatch\: property can contain [a-zA-Z0-9_\\\<\>\|&\s,]+ but database expects [a-zA-Z0-9_\\\<\>\|&\s,]+\.$#'
             path: src/Entity/*
 
+        # Disable pagination errors
+        -
+            message: '#^Property App\\Application\\Paginator\\DoctrineORMPaginator\<T\>\:\:\$items \(array\<int, T\>\) does not accept mixed\.$#'
+            path: src/Application/Paginator/DoctrineORMPaginator.php
+        -
+            message: '#^Method App\\Application\\Paginator\\DoctrineORMPaginator\:\:getItems\(\) should return array\<int, T\> but returns mixed\.$#'
+            path: src/Application/Paginator/DoctrineORMPaginator.php
+
     scanFiles:
         - data/fixtures/posts-data.php

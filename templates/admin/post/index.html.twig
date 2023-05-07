@@ -1,10 +1,12 @@
+{% from "admin/macros.html.twig" import paginate %}
+
 {% extends 'admin/base.html.twig' %}
 
 {% block body %}
     <div class="mx-3 mt-3">
         <div class="row">
             <div class="col-lg-4">
-                <h1>Posts list</h1>
+                <h1>Posts list ({{ pagination.totalItems }})</h1>
             </div>
             <div class="col-lg-8 align-self-center">
                 <a class="btn btn-primary float-end" href="#">Add a new post</a>
@@ -27,7 +29,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% for post in posts %}
+                                {% for post in pagination.items %}
                                     <tr>
                                         <td>{{ post.title }}</td>
                                         <td>{{ post.publishedAt|date('Y-m-d') }}</td>
@@ -38,6 +40,8 @@
                                 </tbody>
                             </table>
                         </div>
+
+                        {{ paginate(pagination) }}
                     </div>
                 </div>
             </div>

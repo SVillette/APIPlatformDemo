@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
+use App\Application\Paginator\DoctrineORMPaginator;
+use App\Application\Paginator\PaginatorInterface;
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Criteria;
@@ -23,7 +25,7 @@ class PostRepository extends ServiceEntityRepository implements PostRepositoryIn
         parent::__construct($registry, Post::class);
     }
 
-    public function findLatest(int $page = 1): array
+    public function findLatestPaginated(int $page = 1): PaginatorInterface
     {
         $currentPage = max(1, $page);
         $firstResult = ($currentPage - 1) * self::POSTS_PER_PAGE;
@@ -36,6 +38,6 @@ class PostRepository extends ServiceEntityRepository implements PostRepositoryIn
             ->setFirstResult($firstResult)
         ;
 
-        return $queryBuilder->getQuery()->getResult();
+        return new DoctrineORMPaginator($queryBuilder->getQuery(), $page);
     }
 }

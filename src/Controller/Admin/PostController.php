@@ -21,8 +21,13 @@ final class PostController extends AbstractController
     #[Route(name: 'index')]
     public function indexAction(Request $request): Response
     {
-        $posts = $this->postRepository->findLatest($request->request->getInt('page', 1));
+        $page = $request->query->getInt('page', 1);
+        $pagination = $this->postRepository->findLatestPaginated($page);
 
-        return $this->render('admin/post/index.html.twig', ['posts' => $posts]);
+        if (!$pagination->hasPage($page)) {
+            return $this->redirectToRoute('app_admin_post_index', ['page' => $pagination->getPagesTotal()]);
+        }
+
+        return $this->render('admin/post/index.html.twig', ['pagination' => $pagination]);
     }
 }

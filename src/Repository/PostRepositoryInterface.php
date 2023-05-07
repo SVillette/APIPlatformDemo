@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
+use App\Application\Paginator\PaginatorInterface;
 use App\Entity\Post;
 use App\Entity\PostInterface;
 use Doctrine\Persistence\ObjectRepository;
@@ -19,7 +20,7 @@ use Doctrine\Persistence\ObjectRepository;
 interface PostRepositoryInterface extends ObjectRepository
 {
     /**
-     * @return array<int, PostInterface>
+     * @return PaginatorInterface<PostInterface>
      */
-    public function findLatest(int $page = 1): array;
+    public function findLatestPaginated(int $page = 1): PaginatorInterface;
 }
