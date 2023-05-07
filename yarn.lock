@@ -2400,6 +2400,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"bootstrap-icons@npm:^1.10.5":
+  version: 1.10.5
+  resolution: "bootstrap-icons@npm:1.10.5"
+  checksum: 8a0cfbd237723793dfb04106fdeed7f86bb59249a01a1623b325bf84d61306c22bb46d3df0795f80f0e77d43cd7485273571c253ee7910eb67fae9489691daad
+  languageName: node
+  linkType: hard
+
 "bootstrap@npm:5.2":
   version: 5.2.3
   resolution: "bootstrap@npm:5.2.3"
@@ -5680,6 +5687,7 @@ __metadata:
     "@symfony/stimulus-bridge": ^3.2.0
     "@symfony/webpack-encore": ^4.0.0
     bootstrap: 5.2
+    bootstrap-icons: ^1.10.5
     core-js: ^3.23.0
     regenerator-runtime: ^0.13.9
     sass: ^1.62.1
