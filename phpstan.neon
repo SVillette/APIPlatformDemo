@@ -15,3 +15,6 @@ parameters:
         -
             message: '#^Property App\\Entity\\[a-zA-Z0-9_\\]+\:\:\$[a-zA-Z0-9_]+ type mapping mismatch\: property can contain [a-zA-Z0-9_\\\<\>\|&\s,]+ but database expects [a-zA-Z0-9_\\\<\>\|&\s,]+\.$#'
             path: src/Entity/*
+
+    scanFiles:
+        - data/fixtures/posts-data.php

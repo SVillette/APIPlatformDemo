@@ -9,9 +9,13 @@ use App\Entity\Post;
 use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Generator;
 use Symfony\Component\Uid\Ulid;
 use Webmozart\Assert\Assert;
+
+use function dirname;
+use function postGenerator;
+
+require_once dirname(__DIR__) . '../../data/fixtures/posts-data.php';
 
 final class PostFixtures extends Fixture
 {
@@ -26,7 +30,7 @@ final class PostFixtures extends Fixture
         $publishedAt = $this->getNextPublishedAt();
         Assert::notNull($publishedAt);
 
-        $postDataGenerator = self::generatePostData();
+        $postDataGenerator = postGenerator();
         $postData = $postDataGenerator->current();
         $reference = $postDataGenerator->key();
 
@@ -42,7 +46,7 @@ final class PostFixtures extends Fixture
             $post->setCreatedAt($publishedAt);
             $post->setUpdatedAt($publishedAt);
 
-            $author = $postData['author'];
+            $author = $this->getReference(AdminUserDataFixtures::REFERENCE_ADMIN_USER_1);
             Assert::isInstanceOf($author, AdminUserInterface::class);
 
             $author->addPost($post);
@@ -59,15 +63,6 @@ final class PostFixtures extends Fixture
         } while (null !== $publishedAt && null !== $postData);
 
         $manager->flush();
-    }
-
-    public function generatePostData(): Generator
-    {
-        yield 'post-1' => [
-            'title' => 'Lorem ipsum dolor sit amet',
-            'content' => 'Ab accusamus animi debitis eligendi fugiat fugit illo illum mollitia nam nemo officia porro, quas quibusdam, quisquam, ratione reprehenderit unde voluptas voluptatibus?',
-            'author' => $this->getReference(AdminUserDataFixtures::REFERENCE_ADMIN_USER_1),
-        ];
     }
 
     private function getNextPublishedAt(): ?DateTimeImmutable
