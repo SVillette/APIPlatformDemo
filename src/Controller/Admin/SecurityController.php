@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Entity\AdminUserInterface;
+use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 #[Route(path: '/admin')]
-final class LoginController extends AbstractController
+final class SecurityController extends AbstractController
 {
     public function __construct(
         private readonly AuthenticationUtils $authenticationUtils,
@@ -19,7 +20,7 @@ final class LoginController extends AbstractController
     }
 
     #[Route(path: '/login', name: 'app_admin_login')]
-    public function indexAction(): Response
+    public function loginAction(): Response
     {
         $user = $this->getUser();
 
@@ -34,5 +35,11 @@ final class LoginController extends AbstractController
             'error' => $error,
             'last_username' => $lastUsername,
         ]);
+    }
+
+    #[Route(path: '/logout', name: 'app_admin_logout')]
+    public function logoutAction(): never
+    {
+        throw new RuntimeException('This action should be handle by Symfony Security component');
     }
 }

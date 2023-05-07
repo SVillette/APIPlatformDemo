@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 
 #[Group('functional')]
-final class LoginControllerTest extends WebTestCase
+final class SecurityControllerTest extends WebTestCase
 {
     public function testAdminUrlRedirectsToAdminLogin(): void
     {
