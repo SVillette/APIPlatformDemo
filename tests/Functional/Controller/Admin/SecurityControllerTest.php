@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Functional\Controller;
+namespace App\Tests\Functional\Controller\Admin;
 
 use App\Repository\AdminUserRepositoryInterface;
 use PHPUnit\Framework\Attributes\Group;
