@@ -25,7 +25,7 @@ final class PostController extends AbstractController
     ) {
     }
 
-    #[Route(name: 'index')]
+    #[Route(name: 'index', methods: [Request::METHOD_GET])]
     public function indexAction(Request $request): Response
     {
         $page = $request->query->getInt('page', 1);
@@ -38,7 +38,7 @@ final class PostController extends AbstractController
         return $this->render('admin/post/index.html.twig', ['pagination' => $pagination]);
     }
 
-    #[Route(path: '/create', name: 'create')]
+    #[Route(path: '/create', name: 'create', methods: [Request::METHOD_GET, Request::METHOD_POST])]
     public function createAction(Request $request): Response
     {
         $form = $this->createForm(PostType::class)->handleRequest($request);
@@ -58,12 +58,13 @@ final class PostController extends AbstractController
         return $this->render('admin/post/create.html.twig', ['form' => $form]);
     }
 
-    #[Route(path: '/{id}/update', name: 'update', requirements: ['id' => '\d+'])]
+    #[Route(path: '/{id}/update', name: 'update', requirements: ['id' => '\d+'], methods: [Request::METHOD_GET, Request::METHOD_PUT])]
     public function updateAction(Request $request, int $id): Response
     {
         $post = $this->postRepository->findOneBy(['id' => $id]) ?? throw $this->createNotFoundException();
 
-        $form = $this->createForm(PostType::class, UpdatePost::fromEntity($post))->handleRequest($request);
+        $form = $this->createForm(PostType::class, UpdatePost::fromEntity($post), ['method' => Request::METHOD_PUT]);
+        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $dto = $form->getData();
