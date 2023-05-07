@@ -21,4 +21,4 @@ sleep 0.1
 qdbus org.kde.yakuake /yakuake/tabs org.kde.yakuake.setTabTitle "$session3" "Yarn"
 qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal "$session3" "cd $SCRIPTPATH"
 sleep 0.1
-qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal "$session3" 'yarn'
+qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal "$session3" 'yarn watch'

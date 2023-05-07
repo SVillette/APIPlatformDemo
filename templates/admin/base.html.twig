@@ -14,7 +14,9 @@
         {% endblock %}
     </head>
     <body>
-    <div class="container-fluid">
+        {{ include('admin/_navbar.html.twig', with_context = false) }}
+
+    <div class="container-fluid body">
         {% block body %}{% endblock %}
     </div>
     </body>
