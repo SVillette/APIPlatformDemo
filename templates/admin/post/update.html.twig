@@ -1,0 +1,33 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Update a post{% endblock %}
+
+{% block body %}
+    <div class="mx-3 mt-3">
+        <div class="row">
+            <div class="col-lg-4">
+                <h1>Update a post</h1>
+            </div>
+        </div>
+
+        <div class="card border border1 border-dark bg-light">
+            {{ form_start(form, {action: path('app_admin_post_update', {id: post.id}), attr: {novalidate: 'novalidate'}}) }}
+
+            {{ form_widget(form._token) }}
+
+            {{ include('admin/post/_form.html.twig', {form: form}, with_context = false) }}
+
+            <div class="card-footer">
+                <div class="d-flex justify-content-between">
+                    <a class="btn btn-danger" href="{{ path('app_admin_post_index') }}">Cancel</a>
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </div>
+            </div>
+
+            {{ form_end(form, {render_rest: false}) }}
+        </div>
+    </div>
+
+{% endblock %}
+
+

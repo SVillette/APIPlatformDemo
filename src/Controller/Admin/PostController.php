@@ -57,4 +57,25 @@ final class PostController extends AbstractController
 
         return $this->render('admin/post/create.html.twig', ['form' => $form]);
     }
+
+    #[Route(path: '/{id}/update', name: 'update', requirements: ['id' => '\d+'])]
+    public function updateAction(Request $request, int $id): Response
+    {
+        $post = $this->postRepository->findOneBy(['id' => $id]) ?? throw $this->createNotFoundException();
+
+        $form = $this->createForm(PostType::class, UpdatePost::fromEntity($post))->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $dto = $form->getData();
+            Assert::isInstanceOf($dto, UpdatePost::class);
+
+            $this->postHandler->update($post, $dto);
+
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('app_admin_post_index');
+        }
+
+        return $this->render('admin/post/update.html.twig', ['form' => $form, 'post' => $post]);
+    }
 }

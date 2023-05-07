@@ -15,18 +15,8 @@
 
         {{ form_widget(form._token) }}
 
-        <div class="card-body">
-            <div class="row">
-                <div class="col mx-2">
-                    {{ form_row(form.title) }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col mx-2">
-                    {{ form_row(form.content) }}
-                </div>
-            </div>
-        </div>
+        {{ include('admin/post/_form.html.twig', {form: form}, with_context = false) }}
+
         <div class="card-footer">
             <div class="d-flex justify-content-between">
                 <a class="btn btn-danger" href="{{ path('app_admin_post_index') }}">Cancel</a>

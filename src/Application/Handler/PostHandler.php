@@ -38,6 +38,8 @@ final class PostHandler implements PostHandlerInterface
 
     public function update(PostInterface $post, UpdatePost $data): void
     {
-        // TODO: Implement update() method.
+        $post->setTitle($data->title);
+        $post->setContent($data->content);
+        $post->update();
     }
 }
