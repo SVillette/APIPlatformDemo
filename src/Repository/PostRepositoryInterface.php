@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Application\Paginator\PaginatorInterface;
+use App\DTO\PostRepresentation;
 use App\Entity\Post;
 use App\Entity\PostInterface;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ObjectRepository;
 
 /**
@@ -19,10 +21,19 @@ use Doctrine\Persistence\ObjectRepository;
  */
 interface PostRepositoryInterface extends ObjectRepository
 {
+    final public const POSTS_PER_PAGE = 10;
+
     /**
      * @return PaginatorInterface<PostInterface>
      */
     public function findLatestPaginated(int $page = 1): PaginatorInterface;
+
+    /**
+     * @return array<int, PostRepresentation>
+     */
+    public function findLatest(int $page = 1): array;
+
+    public function findLatestQueryBuilder(int $page = 1): QueryBuilder;
 
     public function countAll(): int;
 }

@@ -47,6 +47,11 @@ final class DoctrineORMPaginator implements PaginatorInterface
         return $this->itemsTotal;
     }
 
+    public function getItemsPerPage(): int
+    {
+        return $this->itemsPerPage;
+    }
+
     public function getCurrentPage(): int
     {
         return $this->currentPage;

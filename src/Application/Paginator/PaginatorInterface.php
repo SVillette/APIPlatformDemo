@@ -16,6 +16,8 @@ interface PaginatorInterface
 
     public function totalItems(): int;
 
+    public function getItemsPerPage(): int;
+
     public function getCurrentPage(): int;
 
     public function hasPreviousPage(): bool;
