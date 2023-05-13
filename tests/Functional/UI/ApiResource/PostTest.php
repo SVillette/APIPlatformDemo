@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Functional\Api;
+namespace App\Tests\Functional\UI\ApiResource;
 
 use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
-use App\ApiResource\Post;
 use App\Repository\PostRepositoryInterface;
+use App\UI\ApiResource\Post;
 use PHPUnit\Framework\Attributes\Group;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +18,7 @@ use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Webmozart\Assert\Assert;
 
 #[Group('functional')]
-final class PostApiResourceTest extends ApiTestCase
+final class PostTest extends ApiTestCase
 {
     /**
      * @throws TransportExceptionInterface

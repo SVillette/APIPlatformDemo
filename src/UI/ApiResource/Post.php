@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\ApiResource;
+namespace App\UI\ApiResource;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
