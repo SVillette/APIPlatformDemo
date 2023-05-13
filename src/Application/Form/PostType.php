@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Form;
+namespace App\Application\Form;
 
-use App\DTO\UpdatePost;
+use App\Application\DTO\UpdatePost;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;

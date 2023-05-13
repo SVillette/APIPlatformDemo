@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Validator\Constraints;
+namespace App\Application\Validator\Constraints;
 
 use App\Domain\Repository\AdminUserRepositoryInterface;
 use Symfony\Component\Validator\Constraint;

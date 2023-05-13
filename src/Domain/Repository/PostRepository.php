@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Domain\Repository;
 
+use App\Application\DTO\PostRepresentation;
 use App\Application\Paginator\DoctrineORMPaginator;
 use App\Application\Paginator\PaginatorInterface;
 use App\Domain\Entity\Post;
-use App\DTO\PostRepresentation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\NonUniqueResultException;

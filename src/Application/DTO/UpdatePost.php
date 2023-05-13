@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\DTO;
+namespace App\Application\DTO;
 
 use App\Domain\Entity\PostInterface;
 use Symfony\Component\Validator\Constraints\Length;

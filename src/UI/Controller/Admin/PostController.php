@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\UI\Controller\Admin;
 
+use App\Application\DTO\UpdatePost;
+use App\Application\Form\PostType;
 use App\Application\Handler\PostHandlerInterface;
 use App\Domain\Repository\PostRepositoryInterface;
-use App\DTO\UpdatePost;
-use App\Form\PostType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

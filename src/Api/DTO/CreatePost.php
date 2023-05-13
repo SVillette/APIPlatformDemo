@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Api\DTO;
 
-use App\Validator\Constraints\AdminUserEmail;
+use App\Application\Validator\Constraints\AdminUserEmail;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
