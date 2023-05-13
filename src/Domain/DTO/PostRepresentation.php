@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Application\DTO;
+namespace App\Domain\DTO;
 
 use App\Domain\Entity\PostInterface;
 use DateTimeInterface;

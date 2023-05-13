@@ -7,7 +7,7 @@ namespace App\Api\StateProvider;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
 use App\Api\Paginator\DoctrineDTOPaginator;
-use App\Application\DTO\PostRepresentation;
+use App\Domain\DTO\PostRepresentation;
 use App\Domain\Repository\PostRepositoryInterface;
 
 /**

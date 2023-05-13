@@ -7,7 +7,7 @@ namespace App\Api\StateProcessor;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use App\Api\DTO\CreatePost;
-use App\Application\DTO\PostRepresentation;
+use App\Domain\DTO\PostRepresentation;
 use App\Domain\Entity\Post;
 use App\Domain\Repository\AdminUserRepositoryInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
