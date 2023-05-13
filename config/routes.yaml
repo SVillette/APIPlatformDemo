@@ -1,7 +1,7 @@
 controllers:
     resource:
-        path: ../src/Controller/Admin
-        namespace: App\Controller\Admin
+        path: ../src/UI/Controller/Admin
+        namespace: App\UI\Controller\Admin
         prefix: /admin
         trailing_slash_on_root: false
     type: attribute

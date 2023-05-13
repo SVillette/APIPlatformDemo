@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Functional\Controller\Admin;
+namespace App\Tests\Functional\UI\Controller\Admin;
 
 use App\Repository\PostRepositoryInterface;
 use DateTimeInterface;

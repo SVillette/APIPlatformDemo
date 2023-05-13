@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Functional\Controller\Admin;
+namespace App\Tests\Functional\UI\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 

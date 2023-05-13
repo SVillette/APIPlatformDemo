@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Admin;
+namespace App\UI\Controller\Admin;
 
 use App\Application\Handler\PostHandlerInterface;
 use App\DTO\UpdatePost;
