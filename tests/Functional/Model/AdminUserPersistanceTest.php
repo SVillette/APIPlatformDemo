@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Model;
 
-use App\Entity\AdminUser;
-use App\Entity\AdminUserInterface;
+use App\Domain\Entity\AdminUser;
+use App\Domain\Entity\AdminUserInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\Attributes\Group;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;

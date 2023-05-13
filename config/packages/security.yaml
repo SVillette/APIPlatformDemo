@@ -8,7 +8,7 @@ security:
         users_in_memory: { memory: null }
         app_admin_user_provider:
             entity:
-                class: App\Entity\AdminUser
+                class: App\Domain\Entity\AdminUser
                 property: email
 
     firewalls:
