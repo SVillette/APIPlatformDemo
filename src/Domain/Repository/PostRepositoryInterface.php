@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Repository;
+namespace App\Domain\Repository;
 
 use App\Application\Paginator\PaginatorInterface;
+use App\Domain\Entity\Post;
+use App\Domain\Entity\PostInterface;
 use App\DTO\PostRepresentation;
-use App\Entity\Post;
-use App\Entity\PostInterface;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ObjectRepository;
 

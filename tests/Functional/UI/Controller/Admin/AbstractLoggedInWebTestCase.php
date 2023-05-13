@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\UI\Controller\Admin;
 
-use App\Repository\AdminUserRepositoryInterface;
+use App\Domain\Repository\AdminUserRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

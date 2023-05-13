@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\UI\Controller\Admin;
 
-use App\Repository\AdminUserRepositoryInterface;
-use App\Repository\PostRepositoryInterface;
+use App\Domain\Repository\AdminUserRepositoryInterface;
+use App\Domain\Repository\PostRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

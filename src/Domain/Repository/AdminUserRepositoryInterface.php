@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Repository;
+namespace App\Domain\Repository;
 
-use App\Entity\AdminUser;
-use App\Entity\AdminUserInterface;
+use App\Domain\Entity\AdminUser;
+use App\Domain\Entity\AdminUserInterface;
 use Doctrine\Persistence\ObjectRepository;
 
 /**

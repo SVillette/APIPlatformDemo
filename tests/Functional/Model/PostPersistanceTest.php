@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Model;
 
-use App\Entity\AdminUser;
-use App\Entity\AdminUserInterface;
-use App\Entity\Post;
+use App\Domain\Entity\AdminUser;
+use App\Domain\Entity\AdminUserInterface;
+use App\Domain\Entity\Post;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use PHPUnit\Framework\Attributes\Group;

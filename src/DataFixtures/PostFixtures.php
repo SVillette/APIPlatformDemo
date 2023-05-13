@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use App\Entity\AdminUserInterface;
-use App\Entity\Post;
+use App\Domain\Entity\AdminUserInterface;
+use App\Domain\Entity\Post;
 use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;

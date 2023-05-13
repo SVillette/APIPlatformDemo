@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Functional\UI\ApiResource;
 
 use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
-use App\Repository\PostRepositoryInterface;
+use App\Domain\Repository\PostRepositoryInterface;
 use App\UI\ApiResource\Post;
 use PHPUnit\Framework\Attributes\Group;
 use Symfony\Component\HttpFoundation\Request;

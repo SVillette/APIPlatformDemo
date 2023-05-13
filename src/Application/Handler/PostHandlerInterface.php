@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Application\Handler;
 
+use App\Domain\Entity\PostInterface;
 use App\DTO\UpdatePost;
-use App\Entity\PostInterface;
 
 interface PostHandlerInterface
 {

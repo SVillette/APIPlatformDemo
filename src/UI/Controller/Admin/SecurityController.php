@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Controller\Admin;
 
-use App\Entity\AdminUserInterface;
+use App\Domain\Entity\AdminUserInterface;
 use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

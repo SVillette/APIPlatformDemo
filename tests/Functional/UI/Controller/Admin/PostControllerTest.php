@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\UI\Controller\Admin;
 
-use App\Repository\PostRepositoryInterface;
+use App\Domain\Repository\PostRepositoryInterface;
 use DateTimeInterface;
 use Doctrine\Common\Collections\Criteria;
 use PHPUnit\Framework\Attributes\Group;

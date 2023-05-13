@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Application\Handler;
 
+use App\Domain\Entity\AdminUserInterface;
+use App\Domain\Entity\Post;
+use App\Domain\Entity\PostInterface;
 use App\DTO\UpdatePost;
-use App\Entity\AdminUserInterface;
-use App\Entity\Post;
-use App\Entity\PostInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Uid\Ulid;
 use Webmozart\Assert\Assert;
