@@ -7,11 +7,11 @@ namespace App\Api\StateProcessor;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use App\Api\DTO\CreatePost;
+use App\Application\DTO\UpdatePost;
+use App\Application\Handler\PostHandlerInterface;
 use App\Domain\DTO\PostRepresentation;
-use App\Domain\Entity\Post;
 use App\Domain\Repository\AdminUserRepositoryInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
-use Symfony\Component\Uid\Ulid;
 use Webmozart\Assert\Assert;
 
 final class CreatePostProcessor implements ProcessorInterface
@@ -22,6 +22,7 @@ final class CreatePostProcessor implements ProcessorInterface
         private readonly AdminUserRepositoryInterface $adminUserRepository,
         #[Autowire(service: 'api_platform.doctrine.orm.state.persist_processor')]
         ProcessorInterface $persistProcessor,
+        private readonly PostHandlerInterface $postHandler,
     ) {
         $this->persistProcessor = $persistProcessor;
     }
@@ -39,14 +40,7 @@ final class CreatePostProcessor implements ProcessorInterface
 
         Assert::notNull($adminUser);
 
-        $post = new Post();
-        $post->setUlid(new Ulid());
-        $post->setTitle($data->title);
-        $post->setContent($data->content);
-        $post->create();
-        $post->publish();
-
-        $adminUser->addPost($post);
+        $post = $this->postHandler->create(new UpdatePost($data->title, $data->content), $adminUser);
 
         $this->persistProcessor->process($post, $operation, $uriVariables, $context);
 

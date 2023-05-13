@@ -18,12 +18,8 @@ final class PostHandler implements PostHandlerInterface
     {
     }
 
-    public function create(UpdatePost $data): PostInterface
+    public function create(UpdatePost $data, AdminUserInterface $adminUser): PostInterface
     {
-        /** @var AdminUserInterface|null $currentAdminUser */
-        $currentAdminUser = $this->tokenStorage->getToken()?->getUser();
-        Assert::isInstanceOf($currentAdminUser, AdminUserInterface::class);
-
         $post = new Post();
         $post->setUlid(new Ulid());
         $post->setTitle($data->title);
@@ -31,9 +27,18 @@ final class PostHandler implements PostHandlerInterface
         $post->create();
         $post->publish();
 
-        $currentAdminUser->addPost($post);
+        $adminUser->addPost($post);
 
         return $post;
+    }
+
+    public function createForCurrentAdminUser(UpdatePost $data): PostInterface
+    {
+        /** @var AdminUserInterface|null $currentAdminUser */
+        $currentAdminUser = $this->tokenStorage->getToken()?->getUser();
+        Assert::isInstanceOf($currentAdminUser, AdminUserInterface::class);
+
+        return $this->create($data, $currentAdminUser);
     }
 
     public function update(PostInterface $post, UpdatePost $data): void

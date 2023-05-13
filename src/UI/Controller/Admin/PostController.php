@@ -47,7 +47,7 @@ final class PostController extends AbstractController
             $dto = $form->getData();
             Assert::isInstanceOf($dto, UpdatePost::class);
 
-            $post = $this->postHandler->create($dto);
+            $post = $this->postHandler->createForCurrentAdminUser($dto);
 
             $this->entityManager->persist($post);
             $this->entityManager->flush();
