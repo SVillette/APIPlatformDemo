@@ -13,8 +13,8 @@ parameters:
     ignoreErrors:
         # Disable database type mismatch for simplicity.
         -
-            message: '#^Property App\\Entity\\[a-zA-Z0-9_\\]+\:\:\$[a-zA-Z0-9_]+ type mapping mismatch\: property can contain [a-zA-Z0-9_\\\<\>\|&\s,]+ but database expects [a-zA-Z0-9_\\\<\>\|&\s,]+\.$#'
-            path: src/Entity/*
+            message: '#^Property App\\Domain\\Entity\\[a-zA-Z0-9_\\]+\:\:\$[a-zA-Z0-9_]+ type mapping mismatch\: property can contain [a-zA-Z0-9_\\\<\>\|&\s,]+ but database expects [a-zA-Z0-9_\\\<\>\|&\s,]+\.$#'
+            path: src/Domain/Entity/*
 
         # Disable pagination errors
         -
@@ -26,13 +26,13 @@ parameters:
 
         # PHPStan Doctrine extension cannot know the type of `Query::getSingleScalarResult()`
         -
-            message: '#^Method App\\Repository\\[a-zA-Z0-9_\\]+\:\:[a-zA-Z0-9_]*count[a-zA-Z0-9_]*\(\) should return int but returns mixed\.$#'
-            path: src/Repository/*
+            message: '#^Method App\\Domain\\Repository\\[a-zA-Z0-9_\\]+\:\:[a-zA-Z0-9_]*count[a-zA-Z0-9_]*\(\) should return int but returns mixed\.$#'
+            path: src/Domain/Repository/*
 
         # PHPStan doctrine extension cannot determine type on DTO representation
         -
-            message: '#^Method App\\Repository\\[a-zA-Z0-9_\\]+\:\:[a-zA-Z0-9_]+\(\) should return array\<int, App\\DTO\\[a-zA-Z0-9_\\]+\> but returns mixed\.$#'
-            path: src/Repository/*
+            message: '#^Method App\\Domain\\Repository\\[a-zA-Z0-9_\\]+\:\:[a-zA-Z0-9_]+\(\) should return array\<int, App\\DTO\\[a-zA-Z0-9_\\]+\> but returns mixed\.$#'
+            path: src/Domain/Repository/*
 
     scanFiles:
         - data/fixtures/posts-data.php
