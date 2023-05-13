@@ -11,7 +11,14 @@ This application is only about posts and authors.
 
 ## Installation
 
-- After the repository is cloned, install composer dependencies.
+
+- Create a file `.env.local` with your database credentials or uncomment and replace it in `.env`.
+
+```dotenv
+DATABASE_URL="mysql://app:!ChangeMe!@127.0.0.1:3306/app?serverVersion=8.0.32&charset=utf8mb4"
+```
+
+- Install composer dependencies.
 
 ```shell
 composer install
@@ -21,12 +28,6 @@ composer install
 
 ```shell
 yarn install && yarn dev
-```
-
-- Create a file `.env.local` with your database credentials or uncomment and replace it in `.env`.
-
-```dotenv
-DATABASE_URL="mysql://app:!ChangeMe!@127.0.0.1:3306/app?serverVersion=8.0.32&charset=utf8mb4"
 ```
 
 - Create database.
