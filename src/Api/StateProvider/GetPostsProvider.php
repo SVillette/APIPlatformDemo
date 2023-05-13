@@ -19,6 +19,10 @@ final class GetPostsProvider implements ProviderInterface
     {
     }
 
+    /**
+     * @param array<string, mixed> $uriVariables
+     * @param array{filters?: array{page?: string}} $context
+     */
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): object|array|null
     {
         $page = (int) ($context['filters']['page'] ?? 1);

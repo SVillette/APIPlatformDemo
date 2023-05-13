@@ -34,14 +34,5 @@ parameters:
             message: '#^Method App\\Repository\\[a-zA-Z0-9_\\]+\:\:[a-zA-Z0-9_]+\(\) should return array\<int, App\\DTO\\[a-zA-Z0-9_\\]+\> but returns mixed\.$#'
             path: src/Repository/*
 
-        # API Platform state providers
-        -
-            message: '#^Method App\\Api\\StateProvider\\[a-zA-Z0-9]+\:\:provide\(\) has parameter \$context with no value type specified in iterable type array\.$#'
-            path: src/Api/StateProvider/*
-
-        -
-            message: '#^Method App\\Api\\StateProvider\\[a-zA-Z0-9]+\:\:provide\(\) has parameter \$uriVariables with no value type specified in iterable type array\.$#'
-            path: src/Api/StateProvider/*
-
     scanFiles:
         - data/fixtures/posts-data.php
