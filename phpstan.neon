@@ -31,7 +31,7 @@ parameters:
 
         # PHPStan doctrine extension cannot determine type on DTO representation
         -
-            message: '#^Method App\\Domain\\Repository\\[a-zA-Z0-9_\\]+\:\:[a-zA-Z0-9_]+\(\) should return array\<int, App\\DTO\\[a-zA-Z0-9_\\]+\> but returns mixed\.$#'
+            message: '#^Method App\\Domain\\Repository\\[a-zA-Z0-9_\\]+\:\:[a-zA-Z0-9_]+\(\) should return array\<int, App\\Domain\\DTO\\[a-zA-Z0-9_\\]+\> but returns mixed\.$#'
             path: src/Domain/Repository/*
 
     scanFiles:
